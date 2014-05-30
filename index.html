@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0086)http://developer.garmin.com/web/communicator-api/examples/garminDeviceControlDemo.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml"><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><style type="text/css">.gm-style div,.gm-style span,.gm-style label,.gm-style a{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400}.gm-style div,.gm-style span,.gm-style label{text-decoration:none}.gm-style img{border:0;padding:0;margin:0}</style>
+
+<title>Garmin Communicator Control Demo</title>
+<style type="text/css" media="all">@import "garminDeviceControlDemo.css";</style>&#160;</script><script type="text/javascript" src="./js/prototype.js">&#160;</script><script type="text/javascript" src="./js/Util-Broadcaster.js">&#160;</script><script type="text/javascript" src="./js/Util-BrowserDetect.js">&#160;</script><script type="text/javascript" src="./js/Util-DateTimeFormat.js">&#160;</script><script type="text/javascript" src="./js/Util-PluginDetect.js">&#160;</script><script type="text/javascript" src="./js/Util-XmlConverter.js">&#160;</script><script type="text/javascript" src="./js/GarminMeasurement.js">&#160;</script><script type="text/javascript" src="./js/GarminSample.js">&#160;</script><script type="text/javascript" src="./js/GarminSeries.js">&#160;</script><script type="text/javascript" src="./js/GarminActivity.js">&#160;</script><script type="text/javascript" src="./js/GpxActivityFactory.js">&#160;</script><script type="text/javascript" src="./js/TcxActivityFactory.js">&#160;</script><script type="text/javascript" src="./js/GarminObjectGenerator.js">&#160;</script>
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script></head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body onload="load()"><div style="height:0px; width:0px;"><object id="GarminNetscapePlugin" type="application/vnd-garmin.mygarmin" width="0" height="0">&nbsp;</object></div>
+<script type="text/javascript" src="./js/GarminGpsDataStructures.js">&#160;</script>
+<script type="text/javascript" src="./js/GarminPluginUtils.js">&#160;</script>
+<script type="text/javascript" src="./js/GarminDevice.js">&#160;</script>
+<script type="text/javascript" src="./js/GoogleMapController.js">&#160;</script>
+<script type="text/javascript" src="./js/GarminDevicePlugin.js">&#160;</script>
+<script type="text/javascript" src="./js/GarminDeviceControl.js">&#160;</script> 
+<script type="text/javascript" src="./js/GarminDeviceControlDemo.js">&#160;</script>
+<script type="text/javascript">
+	var display;
+	
+	function load() {
+	    display = new GarminDeviceControlDemo(
+	    	"statusText", 
+	    	"readMap",
+	    	["http://developer.garmin.com/","ee3934433a35ee348583236c2eeadbc1"]
+	    );	    
+	}
+</script>
+
+
+<h2>Garmin Plugin Test Page</h2>
+
+<div id="statusBox">
+	<div id="statusText">Plug-in initialized.  Find some devices to get started.</div>
+
+	<div id="progressBar" style="display: none;" align="left">
+		<div id="progressWrapper"><div id="progressBarDisplay">&nbsp;</div></div>
+	</div>
+</div>
+
+<div id="deviceBox">
+	<input type="button" value="Find Devices" id="findDevicesButton">
+	<input type="button" value="Cancel Find Devices" id="cancelFindDevicesButton" disabled="true">
+
+	<select name="deviceSelect" id="deviceSelect" disabled="true">
+		<option value="-1">No Devices Found</option>
+	</select>
+	<br>
+	
+	<textarea id="deviceInfoText" rows="11" cols="60"></textarea>
+</div>
+
+
+<div id="readBox">
+	File Type:
+	<select name="fileTypeSelect" id="fileTypeSelect" disabled="true">
+		<option value="GPSData">GPX</option>
+		<option value="FitnessHistory">TCX History (all)</option>
+		<option value="FitnessCourses">TCX Courses (all)</option>
+		<option value="FitnessHistoryDirectory">TCX History Directory</option>
+		<option value="FitnessCoursesDirectory">TCX Courses Directory</option>
+		<!--<option value="FitnessHistoryDetail" disabled>   TCX History Detail</option>
+		<option value="FitnessCoursesDetail" disabled>   TCX Courses Detail</option>-->
+		<option value="FitnessWorkouts">TCX Workouts</option>
+		<option value="FitnessUserProfile">TCX User Profile</option>
+		<option value="FitnessActivityGoals">TCX Activity Goals</option>
+	</select>
+	
+	<input type="button" value="Read From Device" id="readDataButton" disabled="true">
+	<input type="button" value="Cancel Read" id="cancelReadDataButton" disabled="true">
+	
+<!--	<textarea id="readTracksText" name="readTracksText" rows="75" cols="75"></textarea>-->
+	<br>
+	Listing:
+	<table id="activityListingHeader" cellpadding="3px">
+		<tbody><tr>
+			<td><input type="checkbox" id="checkAllBox" disabled=""></td>
+			<td><b>Activity</b></td>
+		</tr>
+	</tbody></table>
+	<table id="activityListing" cellpadding="3px">
+			<tbody><tr><td colspan="3">No activities listed.</td></tr>
+	</tbody></table>
+	<input type="button" value="Read Selected from Device" id="readSelectedButton" disabled="true">
+	
+	<br>
+	Routes: 
+	<select name="readRoutesSelect" id="readRoutesSelect" disabled="true">
+		<option value="-1">No Routes Found</option>
+	</select>
+
+	<br>
+	Tracks: 
+	<select name="readTracksSelect" id="readTracksSelect" disabled="true">
+		<option value="-1">No Tracks Found</option>
+	</select>
+	
+	<br>
+	Waypoints:
+	<select name="readWaypointsSelect" id="readWaypointsSelect" disabled="true">
+		<option value="-1">No Waypoints Found</option>
+	</select>
+	
+	<div id="readMap" style="width: 400px; height: 400px; position: relative; background-color: rgb(229, 227, 223); overflow: hidden; -webkit-transform: translateZ(0);"><div></div><div></div><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; cursor: url(http://maps.gstatic.com/mapfiles/openhand_8_8.cur) 8 8, default; -webkit-transform-origin: 0px 0px; -webkit-transform: matrix(1, 0, 0, 1, 0, 0);"><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; width: 100%; z-index: 200;"><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; width: 100%; z-index: 201;"><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"></div></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; width: 100%; z-index: 202;"><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div></div><div style="-webkit-transform: translateZ(0); position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1;"></div></div></div><div style="position: absolute; z-index: 0;"><div style="overflow: hidden;"></div></div></div></div></div></div>
+	
+	Read Data String: <br>
+	<textarea id="dataString" rows="25" cols="50"></textarea>
+	
+	Compressed File String: <br>
+	<textarea id="compressedDataString" rows="25" cols="50"></textarea>	
+</div>
+
+<div id="writeBox">
+	<input type="button" value="Write To Device" id="writeDataButton" disabled="true">
+	<input type="button" value="Cancel Write To Device" id="cancelWriteDataButton" disabled="true">
+	<br>
+	<select name="writeDataSelect" id="writeDataSelect" disabled="true">
+		<option value="" selected="">--Select Test Data--</option>
+		<option value="data/waypoints.gpx">GPX - Waypoints</option>
+		<option value="data/routes.gpx">GPX - Routes</option>
+		<option value="data/walk_courses.tcx">TCX - Courses</option>
+		<option value="data/1mileworkout.wkt">TCX - Workouts</option>
+		<option value="data/user_profile.tcx">TCX - User Profile</option>
+		<option value="data/activity-goals-fr405.tcx">TCX - Activity Goals</option>
+	</select>
+	<br>
+	Filename: <input type="text" id="writeDataFilename" value="test.gpx"><br>
+	Write Contents:<br> 
+	<textarea id="writeDataText" name="writeDataText" rows="21" cols="50">	
+	</textarea>
+</div>
+
+
+</body></html>
