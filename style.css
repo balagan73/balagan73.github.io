@@ -1,0 +1,11 @@
+.question {
+    float: left;
+    padding: 10px 10px;
+}
+.answer {
+    float: left;
+    padding: 10px 10px;
+}
+.qdiv {
+    clear: both;
+}
