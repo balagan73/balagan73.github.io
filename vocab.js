@@ -14,8 +14,6 @@
   // Lecture 2
   lessons['german'].push(['das Haus']);
   lessons['hungarian'].push(['ház']);
-  //console.log("lessons: ");
-  //console.log(lessons);
 
   if (lessons['german'].length != lessons['hungarian'].length) {
       console.log('Different german and hungarian lessons array length!!')
@@ -24,7 +22,6 @@
   let words = [];
   words['hungarian'] = [];
   words['german'] = [];
-  //console.log(lessons['german'].length)
 
   for (let i = 0; i < lessons['german'].length; i++) {
     for (let j = 0; j < lessons['german'][i].length; j++) {
@@ -35,8 +32,6 @@
       words['hungarian'].push(lessons['hungarian'][i][j]);
     }
   }
-  //console.log("words: ");
-  //console.log(words);
 
   let goodAnswer;
 
@@ -46,11 +41,10 @@
     choice['ger'] = words['german'][number];
     choice['hun'] = words['hungarian'][number];
     goodAnswer = choice['hun'];
-    // insert answer in its row
+    // Insert answer in its row.
     let qdiv = document.getElementsByName('qdiv')[0];
 
-
-    // create and populate new divs for answer and question
+    // Create and populate new divs for answer and question.
     let div2 = document.createElement('div');
     div2.setAttribute('class', 'answer');
     div2.setAttribute('name', 'answer');
@@ -58,40 +52,39 @@
     let div1 = document.createElement('div');
     div1.setAttribute('class', 'question');
     div1.setAttribute('name', 'question');
-
-    //let newword = pickWord()['ger'];
     div1.innerHTML = choice['ger'];
 
-    // create div for new row
+    // Create div for new row.
     let newqdiv = document.createElement('div');
     newqdiv.setAttribute('class', 'qdiv');
     newqdiv.setAttribute('name', 'qdiv');
     newqdiv.appendChild(div1);
     newqdiv.appendChild(div2);
-    // insert new row on top
+    // Insert new row on top.
     qdiv.parentNode.insertBefore(newqdiv, qdiv);
   }
 
   // Create first question.
   pickWord();
 
-
+  // Add eventlistener to text field.
   let input = document.getElementsByName('input');
   input[0].addEventListener('keyup', function(event) {
-    // keyup not good for mobile
-    // Number 13 is the "Enter" key on the keyboard
+    // Number 13 is the "Enter" key on the keyboard.
     if (event.keyCode === 13 && input[0].value.trim() != '') {
-      // Cancel the default action, if needed
+      // Cancel the default action, if needed.
       event.preventDefault();
       checkAnswer(input[0].value);
       input[0].value = '';
     }
   }); 
+  
+  // Add eventlistener to send button.
   let button = document.getElementsByName('send');
   button[0].addEventListener('click', function(event) {
     let input = document.getElementsByName('input');
     if (input[0].value.trim() != '') {
-      // Cancel the default action, if needed
+      // Cancel the default action, if needed.
       event.preventDefault();
       checkAnswer(input[0].value);
       input[0].value = '';
@@ -100,23 +93,21 @@
   }); 
 
   function checkAnswer(answer) {
-    //Insert answer in its row.
+    //Insert answer in it's row.
     let adiv = document.getElementsByName('answer')[0];
     adiv.innerHTML = answer;
     answer = prepareWord(answer);
-    console.log(answer);
     if (answer == goodAnswer) {
       adiv.setAttribute('class', 'answer correct');
     }
     else {
       adiv.setAttribute('class', 'answer wrong');
     }
-
     pickWord();
   }
 
   // Trims whitespaces and articles from beginning of a word
-  // and makes string lowercase
+  // and makes string lowercase.
   function prepareWord(word) {
     word = word.toLowerCase();
     word = word.trim();
