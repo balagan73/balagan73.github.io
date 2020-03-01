@@ -112,6 +112,7 @@
     }
     else {
       adiv.setAttribute('class', 'answer wrong');
+      adiv.setAttribute('title', goodAnswer);
     }
     pickWord();
   }
