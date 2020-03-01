@@ -1,45 +1,55 @@
 (function(){
 
-  let lessons = []; 
+  let pages = []; 
 
   // Lecture 1
-  lessons['german'] = [];
-  lessons['hungarian'] = [];
-  lessons['german'].push(['noch', 'der Vater', 'die Mutter', 'das Kind', 'die Rose', 'der Informatiker', 'der Woche', 'der Tag', 'das Mädchen', 'das Brot']);
-  lessons['hungarian'].push(['még', 'apa', 'anya', 'gyerek', 'rózsa', 'informatikus', 'hét', 'nap', 'lány', 'kenyér']);
-  // Use lessons['german'][lecturenumber - 1].push ...
-  lessons['german'][0].push('das Fräulein', 'die Übung', 'der Apfel', 'die Äpfel', 'die Frau', 'üben');
-  lessons['hungarian'][0].push('kisasszony','gyakorlat', 'alma', 'almák', 'asszony', 'gyakorolni');
+  pages['ger'] = [];
+  pages['hun'] = [];
+  pages['ger'].push(['aber',   'ach so',   'der Alltag', 'andere', 'auch', 'begrüßen', 'die Begrüßung', 'der Beruf',  'da', 'das']);
+  pages['hun'].push(['de',     'vagy úgy', 'hétköznap',  'más',    'is',  'üdvözölni', 'üdvözlés',     'foglalkozás', 'itt', 'ez']);
+  pages['ger'][0].push('Deutsch',   'falsch',   'der Familienname', 'die Frau', 'Grüß dich!', 'Guten Tag!', 'heißen',  'hören', 'jetzt', 'kommen');
+  pages['hun'][0].push('német',     'hamis',    'családnév',  'asszony',    'Üdvözöllek!',  'Jó napot!', 'hívni',     'hallani', 'most', 'jönni');
+  pages['ger'][0].push('Kurs',   'der Kursteilnehmer',   'das Land', 'der Lehrer', 'lernen', 'die Liste', 'nicht', 'oder',  'richtig', 'die Schweiz');
+  pages['hun'][0].push('tanfolyam', 'tanfolyami résztvevő', 'ország', 'tanár',    'tanulni',  'lista',    'nem',   'vagy', 'helyes', 'Svájc');
+  pages['ger'][0].push('die Stadt',   'der Student',   'der Tag', 'der Teilnehmer', 'und', 'vor stellen', 'der Vorname', 'die Vorstellung',  'was?', 'wohnen');
+  pages['hun'][0].push('város',     'egyetemista',    'nap',       'résztvevő',    'és',   'bemutatni',   'keresztnév',  'bemutatkozás', 'mi?', 'lakni');
 
-  // Lecture 2
-  lessons['german'].push(['das Haus']);
-  lessons['hungarian'].push(['ház']);
+  //pages['ger'].push(['',   '',   '', '', '', '', '', '',  '', '']);
+  //pages['hun'].push(['',     '', '',  '',    '',  '', '',     '', '', '']);
 
-  if (lessons['german'].length != lessons['hungarian'].length) {
-      console.log('Different german and hungarian lessons array length!!')
+  // Use pages['ger'][pagenumber - 6].push ...
+  //pages['ger'][0].push('das Fräulein', 'die Übung', 'der Apfel', 'die Äpfel', 'die Frau', 'üben');
+  //pages['hun'][0].push('kisasszony','gyakorlat', 'alma', 'almák', 'asszony', 'gyakorolni');
+
+  // Start new page by pushing an array.
+  //pages['ger'].push(['das Haus']);
+  //pages['hun'].push(['ház']);
+
+  if (pages['ger'].length != pages['hun'].length) {
+      console.log('Different ger and hun pages array length!!')
   }
   
   let words = [];
-  words['hungarian'] = [];
-  words['german'] = [];
+  words['hun'] = [];
+  words['ger'] = [];
 
-  for (let i = 0; i < lessons['german'].length; i++) {
-    for (let j = 0; j < lessons['german'][i].length; j++) {
-      if (lessons['german'[i].length != lessons['hungarian'][i].length]) {
-        console.log('Different number of german and hungarian words in lesson number: ' + i); 
+  for (let i = 0; i < pages['ger'].length; i++) {
+    for (let j = 0; j < pages['ger'][i].length; j++) {
+      if (pages['ger'][i].length != pages['hun'][i].length) {
+        console.log('Different number of ger and hun words in lesson number: ' + i); 
       }
-      words['german'].push(lessons['german'][i][j]);
-      words['hungarian'].push(lessons['hungarian'][i][j]);
+      words['ger'].push(pages['ger'][i][j]);
+      words['hun'].push(pages['hun'][i][j]);
     }
   }
 
   let goodAnswer;
 
   function pickWord() {
-    let number = Math.floor(Math.random() * words['german'].length);
+    let number = Math.floor(Math.random() * words['ger'].length);
     let choice = [];
-    choice['ger'] = words['german'][number];
-    choice['hun'] = words['hungarian'][number];
+    choice['ger'] = words['ger'][number];
+    choice['hun'] = words['hun'][number];
     goodAnswer = choice['hun'];
     // Insert answer in its row.
     let qdiv = document.getElementsByName('qdiv')[0];
