@@ -9,3 +9,9 @@
 .qdiv {
     clear: both;
 }
+.correct {
+    background-color: green;
+}
+.wrong {
+    background-color: red;
+}
